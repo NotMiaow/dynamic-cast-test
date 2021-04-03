@@ -1,0 +1,208 @@
+#ifndef DEFINITIONS_H__
+#define DEFINITIONS_H__
+
+#include <map>
+#include <string>
+
+const int BUFFER_LENGTH = 4096;
+const char END_OF_MESSAGE_CHAR = '\4';
+const char REPLACEMENT_CHAR = '\254';
+const std::string LOCAL_HOST = "127.0.0.1";
+const std::string ACCEPTED_STRING = "welcome!";
+
+const int MY_SQL_CONNEXION_SIZE = 8;
+const std::string MY_SQL_NODE_PASSWORD_FILE_NAME = "MySqlNodePassword.json";
+const std::string MY_SQL_NODE_REQUEST_KEY = "request";
+
+enum Ports { NETWORK_MANAGER_PORT = 27016, MY_SQL_NODE_CONNECTOR_PORT = 27017 };
+enum PriorityLevel { HIGH_PRIORITY, LOW_PRIORITY };
+
+// Note that mmr is converted to float in player component's constructor
+// It is passed as template argument as int to follow standard c++
+const int STARTING_MMR = 1600;
+const float MMR_BASE_MODIFIER = 32.0f;
+const float MMR_BASE_MODIFIER_MODIFIER = 2.4f;
+const float ZSCORE_CAP = 5.0f;
+const float STANDARD_DEVIATION_THRESHOLD = 100.0f;
+const float UNEVENLY_MATCHED_TEAMS_THRESHOLD = 100.0f;
+const float PLACEMENTS_MODIFIER = 5.0f;
+const int PLACEMENTS_DURATION = 5;
+
+const float MATCHMAKING_UPDATE_TIME = 5.0f;
+const float BASE_WINDOW_BROADENING_NEEDED = 13.7f;
+const float MAX_LOG_E_OF_QUEUE_SIZE = 6.57f;
+const float BASE_MMR_WINDOW_RADIUS = (STARTING_MMR / 100 * 3.0f);
+const float BASE_DIFFERENTIAL_WINDOW_RADIUS = 3.0f;
+
+enum NetworkNodeType
+{
+	RELAY_BOT,
+	NOTIFICATION_NODE,
+	IMAGE_NODE,
+	NODE_SIZE
+};
+
+enum VoiceUpdateType {
+	VOICE_DISCONNECTED,
+	VOICE_CONNECTED,
+	JOINED
+};
+
+enum CategoryGroupType {
+	ADMINISTRATIVE_CATEGORY_GROUP = 0,
+	DISCUSSION_CATEGORY_GROUP = 3,
+	LOG_CATEGORY_GROUP = 6,
+	VOTE_CATEGORY_GROUP = 8,
+	IDLE_CATEGORY_GROUP = 10,
+	MATCH_GROUP = 13,
+	MEETING_GROUP = 16,
+	TOURNAMENT_GROUP = 19
+};
+
+enum TextGroupType {
+	ADMINISTRATIVE_TEXT_GROUP = 1,
+	DISCUSSION_TEXT_GROUP = 4,
+	LOG_TEXT_GROUP = 7,
+	VOTE_TEXT_GROUP = 9,
+	IDLE_TEXT_GROUP = 11,
+	MATCH_TEXT_GROUP = 14,
+	MEETING_TEXT_GROUP = 17
+};
+
+enum VoiceGroupType {
+	ADMINISTRATIVE_VOICE_GROUP = 2,
+	DISCUSSION_VOICE_GROUP = 5,
+	IDLE_VOICE_GROUP = 12,
+	MATCH_VOICE_GROUP = 15,
+	MEETING_VOICE_GROUP = 18,
+};
+
+enum EsportEventType
+{
+	QUEUE_ESPORT_EVENT,
+	SCRIM_FINDER_ESPORT_EVENT,
+	TOURNAMENT_ESPORT_EVENT
+};
+
+enum MatchmakingMode
+{
+	DIFFERENTIAL_MATCHMAKING_MODE,
+	MMR_MATCHMAKING_MODE
+};
+
+enum TournamentRoundType
+{
+	DEFAULT_TOURNAMENT_ROUND_TYPE
+};
+
+enum AuthorizationLevel
+{
+	USER_AUTHORIZATION,
+	MODERATOR_AUTHORIZATION,
+	ADMINISTRATOR_AUTHORIZATION,
+	SUPER_ADMINISTRATOR_AUTHORIZATION,
+	DEVELOPPER_AUTHORIZATION
+};
+enum Role
+{ 
+	MUTE_ROLE,
+	FREE_MOVEMENT_ROLE,
+	MODERATOR_ROLE,
+	ADMINISTRATOR_ROLE
+};
+enum TeamRole
+{
+	PLAYER_ROLE,
+	CAPTAIN_ROLE,
+	ANALYST_ROLE,
+	COACH_ROLE,
+	MANAGER_ROLE
+};
+enum MeetingRole
+{
+	USER_MEETING_ROLE,
+	HOST_MEETING_ROLE
+};
+
+enum QueueSpotStatus { QSS_WAITING, QSS_TEMP_DEQUEUE, QSS_DEQUEUE };
+enum ScrimState { SS_PENDING, SS_ACCEPTED, SS_STARTING, SS_ONGOING, SS_OVER, SS_DECLINED, SS_EXPIRED };
+enum MeetingState { MS_AWAITING, MS_INITIATING, MS_INITIATED, MS_STARTED, MS_OVER };
+enum MatchState
+{
+	MATCH_STATE_AWAITING,
+	MATCH_STATE_INITIATING,
+	MATCH_STATE_INITIATED,
+	MATCH_STATE_STARTING,
+	MATCH_STATE_RESTARTING,
+	MATCH_STATE_STARTED,
+	MATCH_STATE_EXTENDING,
+	MATCH_STATE_CONTINUING,
+	MATCH_STATE_REPAIRING,
+	MATCH_STATE_OVER
+};
+enum TournamentState { TS_AWAITING, TS_INITIATING, TS_INITIATED, TS_STARTED, TS_OVER };
+enum MeetingType { BASIC_MEETING_TYPE };
+enum AwaitingType
+{
+	LOAD_DISCORD_SERVER_AWAITING,
+	PLAYER_STANDINGS_UPDATE_AWAITING,
+	REQUESTS_EXPIRATION_AWAITING,
+	REQUEST_ACCEPTATION_AWAITING,
+	REQUEST_DECLINATION_AWAITING,
+	SCRIM_STOP_AWAITING,
+	MEETING_START_AWAITING,
+	MEETING_STOP_AWAITING
+};
+
+enum AwaitingDelays
+{
+	USER_REMINDER_FETCH_DELAY = 60,
+	MEETING_POSTPONE_DELAY = 300
+};
+
+enum UserReminderState
+{
+	AWAITING_NOTIFICATION_STATE,
+	SENT_NOTIFICATION_STATE,
+	RECEIVED_NOTIFICATION_STATE
+};
+
+const std::string WHITE_CHECKMARK_ICON = "✅";
+const std::string RED_CROSS_ICON = "❌";
+const std::string QUESTION_MARK_ICON = "❓";
+
+static const std::map<std::string, int> GROUP_TYPES {
+	{ "admin-category", ADMINISTRATIVE_CATEGORY_GROUP },
+	{ "admin-text", ADMINISTRATIVE_TEXT_GROUP },
+	{ "admin-voice", ADMINISTRATIVE_VOICE_GROUP },
+	{ "disc-category", DISCUSSION_CATEGORY_GROUP },
+	{ "disc-text", DISCUSSION_TEXT_GROUP },
+	{ "disc-voice", DISCUSSION_VOICE_GROUP },
+	{ "log-category", LOG_CATEGORY_GROUP },
+	{ "log-text", LOG_TEXT_GROUP },
+	{ "vote-category", VOTE_CATEGORY_GROUP },
+	{ "vote-text", VOTE_TEXT_GROUP },
+	{ "idle-category", IDLE_CATEGORY_GROUP },
+	{ "idle-text", IDLE_TEXT_GROUP },
+	{ "idle-voice", IDLE_VOICE_GROUP },
+	{ "match-category", MATCH_GROUP },
+	{ "match-text", MATCH_TEXT_GROUP },
+	{ "match-voice", MATCH_VOICE_GROUP }
+};
+
+static const std::map<std::string, Role> ROLE_NAMES {
+	{ "Mute", MUTE_ROLE },
+	{ "FreeMovement", FREE_MOVEMENT_ROLE },
+	{ "Moderator", MODERATOR_ROLE },
+	{ "Administrator", ADMINISTRATOR_ROLE }
+};
+
+static const std::map<std::string, TeamRole> TEAM_ROLE_NAMES {
+	{ "player", PLAYER_ROLE },
+	{ "captain", CAPTAIN_ROLE },
+	{ "analyst", ANALYST_ROLE },
+	{ "coach", COACH_ROLE },
+	{ "manager", MANAGER_ROLE }
+};
+
+#endif
